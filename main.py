@@ -5,9 +5,8 @@ import hmac
 import hashlib
 import base64
 
-app_secret = os.environ.get('APP_SECRET')
-if app_secret is None:
-    app_secret = ""
+secret_path = "/tmp/app/secret"
+app_secret = open(secret_path).readline().rstrip() if os.path.exists(secret_path) else ""
 
 # derive key based on configured APP_SECRET
 salt = binascii.unhexlify('aaef2d3f4d77ac66e9c5a6c3d8f921d1')
